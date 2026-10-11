@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JM NEWS — A notícia em primeiro lugar</title>
+<meta name="description" content="JM NEWS: notícias de Medianeira, do Paraná e do Brasil, com cobertura de política, economia, esportes, segurança, saúde e educação.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#0A3A8C; --azul-escuro:#06245C; --azul-claro:#E7EFFC; --azul-medio:#2F6BDB;
+  --branco:#FFFFFF; --tinta:#12203D; --cinza:#5B6882; --urgente:#D8262E;
+  --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--serif);color:var(--tinta);background:var(--branco);line-height:1.6;font-size:18px}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--azul-medio);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--sans);line-height:1.08;letter-spacing:-.02em}
+
+/* Barra do topo */
+.topo{background:var(--azul-escuro);color:var(--branco);font-family:var(--sans);font-size:14px}
+.topo .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:8px;padding-bottom:8px}
+.topo span:last-child{opacity:.8}
+
+/* Cabeçalho */
+header.cab{background:var(--branco);border-bottom:1px solid #D5DEEF;position:sticky;top:0;z-index:20}
+header.cab .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:68px}
+.marca{font-family:var(--sans);font-weight:900;font-size:28px;letter-spacing:-.03em;color:var(--azul);display:flex;align-items:center;gap:10px}
+.marca i{font-style:normal;background:var(--azul);color:var(--branco);padding:2px 9px;border-radius:6px;font-size:24px}
+nav.menu{display:flex;gap:22px;font-family:var(--sans);font-weight:700;font-size:15px}
+nav.menu a{padding:6px 0;border-bottom:3px solid transparent}
+nav.menu a:hover{border-color:var(--azul-medio)}
+.btn{display:inline-block;font-family:var(--sans);font-weight:700;font-size:15px;padding:12px 22px;border-radius:8px;border:2px solid var(--azul);background:var(--azul);color:var(--branco);cursor:pointer}
+.btn:hover{background:var(--azul-escuro);border-color:var(--azul-escuro)}
+.btn.sec{background:transparent;color:var(--azul)}
+.btn.sec:hover{background:var(--azul-claro)}
+
+/* Ticker */
+.ticker{background:var(--azul);color:var(--branco);font-family:var(--sans);font-size:15px;overflow:hidden;display:flex;align-items:stretch}
+.ticker b{background:var(--urgente);padding:10px 18px;font-weight:800;white-space:nowrap;z-index:1}
+.ticker .faixa{display:flex;gap:56px;padding:10px 0;white-space:nowrap;animation:rola 48s linear infinite}
+.ticker:hover .faixa{animation-play-state:paused}
+@keyframes rola{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Capa */
+.capa{padding:56px 0 64px;background:linear-gradient(180deg,var(--azul-claro) 0,var(--branco) 100%)}
+.capa .grade{display:grid;grid-template-columns:1.55fr 1fr;gap:40px;align-items:start}
+.capa h1{font-weight:900;font-size:clamp(40px,6.2vw,76px);color:var(--azul);max-width:11ch}
+.capa .sub{font-size:20px;max-width:34ch;margin:20px 0 28px;color:var(--cinza)}
+.capa .acoes{display:flex;gap:12px;flex-wrap:wrap}
+.destaque{margin-top:44px;background:var(--azul);color:var(--branco);border-radius:14px;padding:28px 30px;display:grid;gap:10px;position:relative;overflow:hidden}
+.destaque::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:var(--azul-medio);opacity:.45}
+.tag{font-family:var(--sans);font-weight:700;font-size:13px;background:var(--branco);color:var(--azul);padding:3px 10px;border-radius:99px;justify-self:start;position:relative;z-index:1}
+.destaque h2{font-size:clamp(24px,3vw,34px);position:relative;z-index:1}
+.destaque p{opacity:.9;max-width:52ch;position:relative;z-index:1}
+.destaque small{font-family:var(--sans);opacity:.75;position:relative;z-index:1}
+
+.agora{background:var(--branco);border:1px solid #D5DEEF;border-radius:14px;padding:22px 24px}
+.agora h3{font-size:20px;color:var(--azul);margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.ponto{width:10px;height:10px;border-radius:50%;background:var(--urgente);animation:pulsa 1.8s ease-in-out infinite}
+@keyframes pulsa{50%{opacity:.35}}
+.agora li{list-style:none;display:grid;grid-template-columns:54px 1fr;gap:12px;padding:14px 0;border-top:1px solid #E4EAF6}
+.agora li:first-of-type{border-top:0}
+.agora time{font-family:var(--sans);font-weight:800;font-size:15px;color:var(--azul-medio)}
+.agora a{font-family:var(--sans);font-weight:700;font-size:16px;line-height:1.3}
+.agora a:hover{color:var(--azul-medio)}
+.agora em{display:block;font-style:normal;font-size:14px;color:var(--cinza);font-family:var(--sans);font-weight:500}
+
+/* Seções */
+section.bloco{padding:64px 0}
+.titulo-bloco{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px;flex-wrap:wrap}
+.titulo-bloco h2{font-size:clamp(28px,3.6vw,42px);color:var(--azul)}
+.titulo-bloco p{color:var(--cinza);max-width:46ch}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips a{font-family:var(--sans);font-weight:700;font-size:15px;padding:10px 18px;border-radius:99px;background:var(--azul-claro);color:var(--azul);border:2px solid transparent}
+.chips a:hover{border-color:var(--azul-medio);background:var(--branco)}
+
+.regiao{background:var(--azul-escuro);color:var(--branco)}
+.regiao .titulo-bloco h2{color:var(--branco)}
+.regiao .titulo-bloco p{color:#B9C9EA}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:var(--branco);color:var(--tinta);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.card .capinha{height:130px;background:var(--azul);position:relative}
+.card:nth-child(2) .capinha{background:var(--azul-medio)}
+.card:nth-child(3) .capinha{background:#1B4FB5}
+.card .capinha::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 14px,transparent 14px 28px)}
+.card .capinha span{position:absolute;left:16px;bottom:14px;font-family:var(--sans);font-weight:800;font-size:13px;background:var(--branco);color:var(--azul);padding:3px 10px;border-radius:99px}
+.card .corpo{padding:20px 22px 24px;display:grid;gap:10px}
+.card h3{font-size:21px}
+.card h3 a:hover{color:var(--azul-medio)}
+.card p{font-size:16px;color:var(--cinza)}
+.card small{font-family:var(--sans);font-size:13px;color:var(--cinza)}
+
+.secoes{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.secoes h3{font-size:18px;color:var(--azul);padding-bottom:10px;border-bottom:3px solid var(--azul);margin-bottom:10px}
+.secoes li{list-style:none;padding:9px 0;font-family:var(--sans);font-weight:600;font-size:15px;line-height:1.35;border-bottom:1px solid #E4EAF6}
+.secoes li a:hover{color:var(--azul-medio)}
+
+/* Newsletter */
+.avise{background:var(--azul-claro);border-radius:18px;padding:44px;display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center}
+.avise h2{font-size:clamp(26px,3.4vw,38px);color:var(--azul)}
+.avise p{margin-top:12px;color:var(--cinza);max-width:44ch}
+.avise form{display:grid;gap:12px}
+.avise label{font-family:var(--sans);font-weight:700;font-size:14px}
+.avise input{width:100%;padding:14px 16px;font-size:16px;border:2px solid #BCCBE8;border-radius:8px;font-family:var(--sans)}
+.avise .msg{font-family:var(--sans);font-size:14px;color:var(--azul);min-height:20px}
+
+footer{background:var(--azul-escuro);color:#C8D6F2;padding:48px 0 32px;font-family:var(--sans);font-size:15px}
+footer .grade{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+footer .marca{color:var(--branco);margin-bottom:10px}
+footer .marca i{background:var(--branco);color:var(--azul)}
+footer h4{color:var(--branco);margin-bottom:10px;font-size:16px}
+footer li{list-style:none;padding:4px 0}
+footer a:hover{color:var(--branco);text-decoration:underline}
+footer .fim{margin-top:32px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);font-size:13px;opacity:.8}
+
+/* Edição protegida */
+.cab-acoes{display:flex;gap:10px;align-items:center}
+.btn.edit{background:var(--azul-claro);color:var(--azul);padding:10px 16px}
+.btn.edit:hover{background:var(--azul-claro);border-color:var(--azul)}
+dialog.login{border:0;border-radius:16px;padding:32px;width:min(420px,92vw);margin:auto;box-shadow:0 20px 60px rgba(6,36,92,.35)}
+dialog.login::backdrop{background:rgba(6,36,92,.6)}
+dialog.login h2{font-size:26px;color:var(--azul);margin-bottom:6px}
+dialog.login p{color:var(--cinza);font-size:16px;margin-bottom:18px}
+dialog.login form{display:grid;gap:12px}
+dialog.login label{font-family:var(--sans);font-weight:700;font-size:14px}
+dialog.login input{width:100%;padding:13px 14px;font-size:16px;border:2px solid #BCCBE8;border-radius:8px;font-family:var(--sans)}
+dialog.login .linha{display:flex;gap:10px;margin-top:4px}
+dialog.login .msg{font-family:var(--sans);font-size:14px;color:var(--urgente);min-height:20px}
+.barra-edicao{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--azul-escuro);color:var(--branco);font-family:var(--sans);font-size:15px;padding:12px 0;box-shadow:0 -6px 24px rgba(6,36,92,.3);display:none}
+.barra-edicao .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.barra-edicao .acoes-barra{display:flex;gap:10px;align-items:center}
+.barra-edicao .btn{padding:9px 18px;background:var(--branco);color:var(--azul);border-color:var(--branco)}
+.barra-edicao .btn.sec{background:transparent;color:var(--branco);border-color:rgba(255,255,255,.6)}
+.barra-edicao .btn.sec:hover{background:rgba(255,255,255,.12)}
+.barra-edicao #estado{min-width:140px}
+.barra-edicao input{font-family:var(--sans);font-size:15px;padding:9px 12px;border-radius:8px;border:2px solid rgba(255,255,255,.5);background:rgba(255,255,255,.1);color:var(--branco);width:190px}
+.barra-edicao input::placeholder{color:#B9C9EA}
+body.editando{padding-bottom:70px}
+body.editando .barra-edicao{display:block}
+body.editando [data-campo]{outline:2px dashed var(--azul-medio);outline-offset:3px;cursor:text;background:rgba(47,107,219,.08)}
+body.editando .destaque [data-campo]{outline-color:#fff;background:rgba(255,255,255,.12)}
+body.editando .ticker .faixa{animation-play-state:paused}
+
+@media (max-width:960px){
+  nav.menu{display:none}
+  .capa .grade,.avise,footer .grade{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .secoes{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:520px){
+  body{font-size:17px}
+  .topo span:last-child{display:none}
+  .secoes{grid-template-columns:1fr}
+  .avise{padding:28px 22px}
+  .destaque{padding:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker .faixa,.ponto{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topo"><div class="wrap"><span id="data">Medianeira, Paraná</span><span>A notícia em primeiro lugar</span></div></div>
+
+<header class="cab">
+  <div class="wrap">
+    <a class="marca" href="#inicio" aria-label="JM NEWS, página inicial"><i>JM</i>NEWS</a>
+    <nav class="menu" aria-label="Principal">
+      <a href="#regiao">Medianeira e região</a>
+      <a href="#parana">Paraná</a>
+      <a href="#brasil">Brasil</a>
+      <a href="#esportes">Esportes</a>
+      <a href="#categorias">Todas as editorias</a>
+    </nav>
+    <div class="cab-acoes">
+      <button class="btn edit" type="button" id="btn-cidade">Sua cidade</button>
+      <a class="btn" href="#avise">Receber notícias</a>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-label="Últimas notícias">
+  <b>AO VIVO</b>
+  <!-- Exemplo: substituir pelos títulos mais recentes vindos do Supabase. A lista é repetida para o efeito de rolagem contínua. -->
+  <div class="faixa" aria-hidden="false">
+    <span>Título da última notícia publicada vai aqui</span><span>Segunda notícia mais recente</span><span>Terceira notícia mais recente</span><span>Quarta notícia mais recente</span>
+    <span aria-hidden="true">Título da última notícia publicada vai aqui</span><span aria-hidden="true">Segunda notícia mais recente</span><span aria-hidden="true">Terceira notícia mais recente</span><span aria-hidden="true">Quarta notícia mais recente</span>
+  </div>
+</div>
+
+<main id="inicio">
+  <section class="capa">
+    <div class="wrap grade">
+      <div>
+        <h1>A notícia em primeiro lugar.</h1>
+        <p class="sub">Tudo o que acontece em Medianeira, no Paraná e no Brasil, publicado com rapidez e checagem.</p>
+        <div class="acoes">
+          <a class="btn" href="#regiao">Ler notícias da região</a>
+          <a class="btn sec" href="#categorias">Ver todas as editorias</a>
+        </div>
+
+        <article class="destaque" id="manchete">
+          <span class="tag">Manchete</span>
+          <h2><a href="#">Título da manchete principal do dia aparece aqui</a></h2>
+          <p>Linha fina com o resumo da notícia em até duas frases, para o leitor decidir se quer abrir a matéria completa.</p>
+          <small>Medianeira e região · hoje</small>
+        </article>
+      </div>
+
+      <aside class="agora" aria-labelledby="t-agora">
+        <h3 id="t-agora"><span class="ponto" aria-hidden="true"></span>Agora no JM NEWS</h3>
+        <ul>
+          <li><time>14:32</time><div><a href="#">Notícia mais recente publicada no portal</a><em>Medianeira</em></div></li>
+          <li><time>13:55</time><div><a href="#">Segunda notícia mais recente, com título direto</a><em>Política</em></div></li>
+          <li><time>13:10</time><div><a href="#">Terceira notícia mais recente da lista</a><em>Segurança pública</em></div></li>
+          <li><time>12:40</time><div><a href="#">Quarta notícia mais recente da lista</a><em>Esportes</em></div></li>
+          <li><time>11:58</time><div><a href="#">Quinta notícia mais recente da lista</a><em>Economia</em></div></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="bloco" id="categorias" style="padding-top:8px">
+    <div class="wrap">
+      <div class="titulo-bloco">
+        <h2>Escolha sua editoria</h2>
+        <p>Cada assunto tem sua página. Vá direto ao que você quer ler.</p>
+      </div>
+      <nav class="chips" aria-label="Editorias">
+        <a href="#brasil">Brasil</a><a href="#parana">Paraná</a><a href="#regiao">Medianeira e região</a>
+        <a href="#politica">Política</a><a href="#esportes">Esportes</a><a href="#futebol">Futebol</a>
+        <a href="#entretenimento">Entretenimento</a><a href="#economia">Economia</a><a href="#tecnologia">Tecnologia</a>
+        <a href="#loterias">Loterias</a><a href="#seguranca">Segurança pública</a><a href="#saude">Saúde</a><a href="#educacao">Educação</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="bloco regiao" id="regiao">
+    <div class="wrap">
+      <div class="titulo-bloco">
+        <h2>Medianeira e região</h2>
+        <p>O que acontece perto de você: cidade, bairros, serviços e decisões que mudam o seu dia.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="capinha"><span>Medianeira</span></div><div class="corpo"><h3><a href="#">Título da notícia local em destaque</a></h3><p>Resumo curto da matéria, com o fato principal em uma ou duas frases.</p><small>Hoje</small></div></article>
+        <article class="card"><div class="capinha"><span>Região</span></div><div class="corpo"><h3><a href="#">Título de outra notícia da região oeste</a></h3><p>Resumo curto da matéria, com o fato principal em uma ou duas frases.</p><small>Hoje</small></div></article>
+        <article class="card"><div class="capinha"><span>Serviço</span></div><div class="corpo"><h3><a href="#">Título de uma notícia de utilidade pública</a></h3><p>Resumo curto da matéria, com o fato principal em uma ou duas frases.</p><small>Ontem</small></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloco" id="parana">
+    <div class="wrap">
+      <div class="titulo-bloco">
+        <h2>Mais notícias</h2>
+        <p>As últimas de cada editoria, em uma olhada.</p>
+      </div>
+      <div class="secoes">
+        <div id="brasil"><h3>Brasil</h3><ul><li><a href="#">Título de notícia nacional</a></li><li><a href="#">Título de notícia nacional</a></li><li><a href="#">Título de notícia nacional</a></li></ul></div>
+        <div><h3>Paraná</h3><ul><li><a href="#">Título de notícia estadual</a></li><li><a href="#">Título de notícia estadual</a></li><li><a href="#">Título de notícia estadual</a></li></ul></div>
+        <div id="esportes"><h3>Esportes e futebol</h3><ul><li><a href="#">Título de notícia esportiva</a></li><li><a href="#">Título de notícia esportiva</a></li><li><a href="#">Título de notícia esportiva</a></li></ul></div>
+        <div id="economia"><h3>Economia</h3><ul><li><a href="#">Título de notícia de economia</a></li><li><a href="#">Título de notícia de economia</a></li><li><a href="#">Título de notícia de economia</a></li></ul></div>
+        <div id="seguranca"><h3>Segurança pública</h3><ul><li><a href="#">Título de notícia de segurança</a></li><li><a href="#">Título de notícia de segurança</a></li><li><a href="#">Título de notícia de segurança</a></li></ul></div>
+        <div id="saude"><h3>Saúde</h3><ul><li><a href="#">Título de notícia de saúde</a></li><li><a href="#">Título de notícia de saúde</a></li><li><a href="#">Título de notícia de saúde</a></li></ul></div>
+        <div id="educacao"><h3>Educação</h3><ul><li><a href="#">Título de notícia de educação</a></li><li><a href="#">Título de notícia de educação</a></li><li><a href="#">Título de notícia de educação</a></li></ul></div>
+        <div id="tecnologia"><h3>Tecnologia e entretenimento</h3><ul><li><a href="#">Título de notícia de tecnologia</a></li><li><a href="#">Título de notícia de entretenimento</a></li><li><a href="#">Resultado das loterias</a></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloco" id="avise" style="padding-top:0">
+    <div class="wrap">
+      <div class="avise">
+        <div>
+          <h2>Receba as principais notícias no seu e-mail</h2>
+          <p>Um resumo por dia com o que mais importa em Medianeira e região. Você cancela quando quiser.</p>
+        </div>
+        <form id="form-avise" novalidate>
+          <label for="email">Seu e-mail</label>
+          <input id="email" type="email" placeholder="nome@exemplo.com" autocomplete="email" required>
+          <button class="btn" type="submit">Quero receber</button>
+          <div class="msg" id="msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grade">
+      <div>
+        <a class="marca" href="#inicio"><i>JM</i>NEWS</a>
+        <p>A notícia em primeiro lugar. Jornalismo local, direto e atualizado.</p>
+      </div>
+      <div>
+        <h4>Editorias</h4>
+        <ul><li><a href="#regiao">Medianeira e região</a></li><li><a href="#parana">Paraná</a></li><li><a href="#brasil">Brasil</a></li><li><a href="#esportes">Esportes</a></li></ul>
+      </div>
+      <div>
+        <h4>Portal</h4>
+        <ul><li><a href="#">Sobre o JM NEWS</a></li><li><a href="#">Fale com a redação</a></li><li><a href="#">Política de privacidade</a></li></ul>
+      </div>
+    </div>
+    <div class="fim">© <span id="ano">2026</span> JM NEWS. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<div class="barra-edicao" id="barra-edicao" role="region" aria-label="Modo de edição">
+  <div class="wrap">
+    <span id="estado">Mesa de edição: clique em qualquer texto marcado para alterar.</span>
+    <div class="acoes-barra">
+      <input id="ed-senha" type="password" placeholder="Senha de publicação" autocomplete="current-password" aria-label="Senha de publicação">
+      <button class="btn" type="button" id="ed-publicar">Publicar</button>
+      <button class="btn sec" type="button" id="ed-descartar">Descartar</button>
+      <button class="btn sec" type="button" id="ed-sair">Sair</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Data e ano atuais
+  (function(){
+    var d = new Date();
+    var data = d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    document.getElementById('data').textContent = 'Medianeira, Paraná · ' + data;
+    document.getElementById('ano').textContent = d.getFullYear();
+  })();
+
+  // Formulário: validação básica. Para salvar os e-mails, conecte ao Supabase (tabela "assinantes").
+  document.getElementById('form-avise').addEventListener('submit', function(e){
+    e.preventDefault();
+    var campo = document.getElementById('email');
+    var msg = document.getElementById('msg');
+    var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(campo.value.trim());
+    if(!ok){ msg.textContent = 'Digite um e-mail válido, como nome@exemplo.com.'; campo.focus(); return; }
+    msg.textContent = 'Cadastro recebido. Obrigado por seguir o JM NEWS.';
+    campo.value = '';
+  });
+</script>
+<script>
+  // ===== Mesa de edição escondida (sem senha, sem servidor) =====
+  // Como abrir: digite  mesajm  com a página aberta, ou acrescente  #mesa-jm  no final do endereço.
+  // Ao clicar em Publicar, os textos são enviados à função do Netlify, que confere a senha (variável EDIT_PASSWORD) e salva para todos os visitantes.
+  (function(){
+    var PALAVRA = 'mesajm', HASH = '#mesa-jm';
+    var SEL = '.destaque h2 a, .destaque p, .agora li a, .card h3 a, .card p, .secoes li a';
+    var campos = [].slice.call(document.querySelectorAll(SEL));
+    campos.forEach(function(el,i){ el.setAttribute('data-campo','c'+i); });
+
+    var $ = function(id){ return document.getElementById(id); };
+    var estado = $('estado');
+    var textoEstado = 'Mesa de edição: clique em qualquer texto marcado para alterar.';
+    var originais = {}, editando = false;
+
+    function guardarOriginais(){ campos.forEach(function(el){ originais[el.dataset.campo] = el.textContent; }); }
+    guardarOriginais();
+
+    // Carrega os textos publicados (se houver)
+    fetch('/api/conteudo').then(function(r){ return r.ok ? r.json() : {}; }).then(function(dados){
+      Object.keys(dados || {}).forEach(function(chave){
+        var el = document.querySelector('[data-campo="'+chave+'"]');
+        if(el && typeof dados[chave] === 'string' && !editando) el.textContent = dados[chave];
+      });
+      guardarOriginais();
+    }).catch(function(){});
+
+    function entrarEdicao(){
+      if(editando) return;
+      editando = true;
+      document.body.classList.add('editando');
+      campos.forEach(function(el){ el.setAttribute('contenteditable','plaintext-only'); el.setAttribute('spellcheck','true'); });
+      estado.textContent = textoEstado;
+    }
+    function sairEdicao(){
+      editando = false;
+      document.body.classList.remove('editando');
+      campos.forEach(function(el){ el.removeAttribute('contenteditable'); el.removeAttribute('spellcheck'); });
+      if(location.hash === HASH){ history.replaceState(null, '', location.pathname + location.search); }
+    }
+
+    campos.forEach(function(el){
+      el.addEventListener('click', function(e){ if(editando) e.preventDefault(); });
+      el.addEventListener('keydown', function(e){ if(editando && e.key === 'Enter'){ e.preventDefault(); } });
+    });
+
+    // Abre ao clicar em "Sua cidade" no cabeçalho
+    $('btn-cidade').addEventListener('click', entrarEdicao);
+
+    // Abre pelo endereço
+    if(location.hash === HASH){ entrarEdicao(); }
+    window.addEventListener('hashchange', function(){ if(location.hash === HASH){ entrarEdicao(); } });
+
+    // Abre digitando a palavra (fora de campos de texto)
+    var digitado = '';
+    document.addEventListener('keydown', function(e){
+      var t = e.target;
+      if(editando || e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+      if(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      digitado = (digitado + e.key.toLowerCase()).slice(-PALAVRA.length);
+      if(digitado === PALAVRA){ digitado = ''; entrarEdicao(); }
+    });
+
+    // Publica as alterações para todos os visitantes
+    $('ed-publicar').addEventListener('click', function(){
+      var senha = $('ed-senha').value;
+      var campos_alterados = {};
+      campos.forEach(function(el){
+        var v = el.textContent.trim();
+        if(v !== originais[el.dataset.campo]){ campos_alterados[el.dataset.campo] = v; }
+      });
+      if(!Object.keys(campos_alterados).length){ estado.textContent = 'Nenhuma alteração para publicar.'; return; }
+      if(!senha){ estado.textContent = 'Digite a senha de publicação.'; $('ed-senha').focus(); return; }
+      estado.textContent = 'Publicando…';
+      fetch('/api/conteudo', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json', 'x-senha': senha},
+        body: JSON.stringify({campos: campos_alterados})
+      }).then(function(r){
+        if(r.status === 401){ estado.textContent = 'Senha incorreta.'; return; }
+        if(!r.ok){ estado.textContent = 'Não foi possível publicar. Tente de novo.'; return; }
+        Object.keys(campos_alterados).forEach(function(k){ originais[k] = campos_alterados[k]; });
+        $('ed-senha').value = '';
+        estado.textContent = 'Publicado. Já está no ar para todos.';
+      }).catch(function(){ estado.textContent = 'Sem conexão com o servidor. Tente de novo.'; });
+    });
+
+    $('ed-descartar').addEventListener('click', function(){
+      campos.forEach(function(el){ el.textContent = originais[el.dataset.campo]; });
+      estado.textContent = 'Alterações descartadas.';
+    });
+    $('ed-sair').addEventListener('click', function(){
+      campos.forEach(function(el){ el.textContent = originais[el.dataset.campo]; });
+      sairEdicao();
+    });
+  })();
+</script>
+</body>
+</html>
